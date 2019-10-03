@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Katalog Film Sub 5</string>
+    <string name="movie_label">FILM</string>
+    <string name="movie_title">Judul Film</string>
+    <string name="tv_show_label">ACARA TV</string>
+    <string name="tv_show_name">Nama Acara TV</string>
+    <string name="release_date">Tanggal Rilis</string>
+    <string name="overview">Ikhtisar</string>
+    <string name="first_air_date">Tanggal Tayang Pertama</string>
+    <string name="original_language">Bahasa Asli</string>
+    <string name="vote_count">Perhitungan Suara</string>
+    <string name="poster">Ini adalah Poster</string>
+    <string name="favorite_label">KESUKAAN</string>
+    <string name="change_language_settings">Pengaturan Ubah Bahasa</string>
+    <string name="detail_movie">Detail Film</string>
+    <string name="add_to_favorite">Tambahkan ke Kesukaan</string>
+    <string name="add_failed">Gagal Menambahkan</string>
+    <string name="delete_from_favorite">Hapus dari Kesukaan</string>
+    <string name="delete_failed">Gagal Menghapus</string>
+    <string name="detail_tv_show">Detail Acara Tv</string>
+    <string name="search">Cari</string>
+    <string name="appwidget_text">Film Kesukaan</string>
+    <string name="add_widget">Tambahkan Widget</string>
+    <string name="favorite_movie">Film Kesukaan</string>
+    <string name="empty_view">Tidak Ada Data</string>
+</resources>
