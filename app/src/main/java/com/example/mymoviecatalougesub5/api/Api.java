@@ -115,4 +115,21 @@ public class Api {
         return url;
     }
 
+    public static URL getUpComingMovie(String todayDate) {
+        // https://api.themoviedb.org/3/discover/movie?api_key={API KEY}&primary_release_date.gte={TODAY DATE}&primary_release_date.lte={TODAY DATE}
+        Uri uri = Uri.parse("https://api.themoviedb.org/3/discover/movie").buildUpon()
+                .appendQueryParameter(API, API_VALUE)
+                .appendQueryParameter("primary_release_date.gte",todayDate)
+                .appendQueryParameter("primary_release_date.lte", todayDate)
+                .build();
+        URL url = null;
+
+        try{
+            url = new URL(uri.toString());
+        }
+        catch (MalformedURLException e){
+            e.printStackTrace();
+        }
+        return url;
+    }
 }

@@ -112,6 +112,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
                 startActivity(intent);
                 break;
+            case R.id.reminder_menu:
+                Intent intent1 = new Intent(MainActivity.this, RemainderSettingsActivity.class);
+                startActivity(intent1);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -12,5 +12,9 @@
         android:icon="@drawable/ic_search_black_24dp"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="always"/>
+    <item
+        android:id="@+id/reminder_menu"
+        android:title="@string/reminder_setting"
+        app:showAsAction="never"/>
 
 </menu>

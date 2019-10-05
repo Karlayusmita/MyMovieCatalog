@@ -65,7 +65,6 @@ public class FavoriteBannerWidget extends AppWidgetProvider {
                 int viewIndex = intent.getIntExtra(EXTRA_ITEM, 0);
                 Toast.makeText(context, "Touched view" + viewIndex, Toast.LENGTH_SHORT).show();
             }
-
         }
     }
 }
