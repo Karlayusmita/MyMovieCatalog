@@ -2,27 +2,31 @@ package com.example.mymoviecatalougesub5.fragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+
 import com.example.mymoviecatalougesub5.R;
 import com.example.mymoviecatalougesub5.adapter.ListTvShowAdapter;
 import com.example.mymoviecatalougesub5.api.Api;
 import com.example.mymoviecatalougesub5.model.TvShow;
 import com.example.mymoviecatalougesub5.network.Network;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,7 +67,7 @@ public class TvShowFragment extends Fragment {
             loadData();
         } else {
             arrayList = savedInstanceState.getParcelableArrayList("list");
-            if (arrayList!=null){
+            if (arrayList != null) {
                 listTvShowAdapter.setTvShowArrayList(arrayList);
             }
         }

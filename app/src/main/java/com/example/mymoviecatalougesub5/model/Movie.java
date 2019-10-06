@@ -2,10 +2,22 @@ package com.example.mymoviecatalougesub5.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Movie implements Parcelable {
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
     private int id;
     private String poster;
     private String title;
@@ -14,11 +26,11 @@ public class Movie implements Parcelable {
     private String overview;
     private int voteAverage;
 
-    public Movie(){
+    public Movie() {
 
     }
 
-    public Movie(JSONObject object){
+    public Movie(JSONObject object) {
         try {
             id = object.getInt("id");
             poster = object.getString("poster_path");
@@ -27,8 +39,7 @@ public class Movie implements Parcelable {
             releaseDate = object.getString("release_date");
             overview = object.getString("overview");
             voteAverage = object.getInt("vote_average");
-        }
-        catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
@@ -42,18 +53,6 @@ public class Movie implements Parcelable {
         overview = in.readString();
         voteAverage = in.readInt();
     }
-
-    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
-        @Override
-        public Movie createFromParcel(Parcel in) {
-            return new Movie(in);
-        }
-
-        @Override
-        public Movie[] newArray(int size) {
-            return new Movie[size];
-        }
-    };
 
     public int getId() {
         return id;

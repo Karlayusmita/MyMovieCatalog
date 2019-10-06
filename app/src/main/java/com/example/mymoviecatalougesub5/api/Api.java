@@ -7,8 +7,6 @@ import com.example.mymoviecatalougesub5.BuildConfig;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static android.app.SearchManager.QUERY;
-
 public class Api {
     private static final String API_KEY = BuildConfig.API_KEY;
     private static final String BASE_URL = BuildConfig.BASE_URL;
@@ -21,7 +19,7 @@ public class Api {
     private static final String LANGUAGE_VALUE = "en-US";
     private static final String QUERY = "query";
 
-    public static URL getListTvShow(){
+    public static URL getListTvShow() {
         //https://api.themoviedb.org/3/discover/tv?api_key=cc95b5cc8e36b6e407ca52aebbf908ec&language=en-US
         Uri uri = Uri.parse(BASE_URL).buildUpon()
                 .appendPath(API_KEY)
@@ -32,17 +30,16 @@ public class Api {
                 .build();
 
         URL url = null;
-        try{
+        try {
             url = new URL(uri.toString());
-        }
-        catch (MalformedURLException e){
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         return url;
 
     }
 
-    public static URL getListMovie(){
+    public static URL getListMovie() {
         //https://api.themoviedb.org/3/discover/movie?api_key=cc95b5cc8e36b6e407ca52aebbf908ec&language=en-US
         Uri uri = Uri.parse(BASE_URL).buildUpon()
                 .appendPath(API_KEY)
@@ -53,35 +50,33 @@ public class Api {
                 .build();
 
         URL url = null;
-        try{
+        try {
             url = new URL(uri.toString());
-        }
-        catch (MalformedURLException e){
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         return url;
 
     }
 
-    public static URL getPoster(String poster_path){
+    public static URL getPoster(String poster_path) {
         // https://image.tmdb.org/t/p/w185/bI37vIHSH7o4IVkq37P8cfxQGMx.jpg
-        poster_path = poster_path.startsWith("/")?poster_path.substring(1) : poster_path;
+        poster_path = poster_path.startsWith("/") ? poster_path.substring(1) : poster_path;
         Uri uri = Uri.parse("https://image.tmdb.org/t/p/").buildUpon()
                 .appendPath("w185")
                 .appendPath(poster_path)
                 .build();
 
         URL url = null;
-        try{
+        try {
             url = new URL(uri.toString());
-        }
-        catch (MalformedURLException e){
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         return url;
     }
 
-    public static URL getSearchMovie(String query){
+    public static URL getSearchMovie(String query) {
         //https://api.themoviedb.org/3/search/movie?api_key={API KEY}&language=en-US&query={MOVIE NAME}
         Uri uri = Uri.parse("https://api.themoviedb.org/3/search/movie").buildUpon()
                 .appendQueryParameter(API, API_VALUE)
@@ -89,16 +84,15 @@ public class Api {
                 .appendQueryParameter(QUERY, query)
                 .build();
         URL url = null;
-        try{
+        try {
             url = new URL(uri.toString());
-        }
-        catch (MalformedURLException e){
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         return url;
     }
 
-    public static URL getSearchTvShow(String query){
+    public static URL getSearchTvShow(String query) {
         //https://api.themoviedb.org/3/search/tv?api_key={API KEY}&language=en-US&query={TV SHOW NAME}
         Uri uri = Uri.parse("https://api.themoviedb.org/3/search/tv").buildUpon()
                 .appendQueryParameter(API, API_VALUE)
@@ -106,10 +100,9 @@ public class Api {
                 .appendQueryParameter(QUERY, query)
                 .build();
         URL url = null;
-        try{
+        try {
             url = new URL(uri.toString());
-        }
-        catch (MalformedURLException e){
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         return url;
@@ -119,15 +112,14 @@ public class Api {
         // https://api.themoviedb.org/3/discover/movie?api_key={API KEY}&primary_release_date.gte={TODAY DATE}&primary_release_date.lte={TODAY DATE}
         Uri uri = Uri.parse("https://api.themoviedb.org/3/discover/movie").buildUpon()
                 .appendQueryParameter(API, API_VALUE)
-                .appendQueryParameter("primary_release_date.gte",todayDate)
+                .appendQueryParameter("primary_release_date.gte", todayDate)
                 .appendQueryParameter("primary_release_date.lte", todayDate)
                 .build();
         URL url = null;
 
-        try{
+        try {
             url = new URL(uri.toString());
-        }
-        catch (MalformedURLException e){
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         return url;

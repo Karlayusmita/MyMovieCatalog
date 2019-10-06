@@ -1,11 +1,5 @@
 package com.example.mymoviecatalougesub5.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import io.realm.Realm;
-import io.realm.RealmResults;
-import io.realm.exceptions.RealmMigrationNeededException;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -22,7 +16,14 @@ import com.example.mymoviecatalougesub5.R;
 import com.example.mymoviecatalougesub5.model.TvShow;
 import com.example.mymoviecatalougesub5.model.TvShowFavorite;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import io.realm.Realm;
+import io.realm.RealmResults;
+import io.realm.exceptions.RealmMigrationNeededException;
+
 public class DetailTvShowActivity extends AppCompatActivity {
+    public static final String IMG_BASE = "http://image.tmdb.org/t/p/";
     private Realm realm;
     private int id;
     private String tvPoster;
@@ -33,7 +34,6 @@ public class DetailTvShowActivity extends AppCompatActivity {
     private int tvVoteCount;
     private boolean isFavorite = false;
     private Menu menu;
-    public static final String IMG_BASE = "http://image.tmdb.org/t/p/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +47,15 @@ public class DetailTvShowActivity extends AppCompatActivity {
         RatingBar voteCount;
         TvShow tvShow;
 
-        if (getSupportActionBar() !=null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.detail_tv_show);
         }
 
         try {
             Realm.init(this);
             realm = Realm.getDefaultInstance();
-        }
-        catch (RealmMigrationNeededException e){
-            if (Realm.getDefaultConfiguration() != null){
+        } catch (RealmMigrationNeededException e) {
+            if (Realm.getDefaultConfiguration() != null) {
                 Realm.deleteRealm(Realm.getDefaultConfiguration());
                 realm = Realm.getDefaultInstance();
             }
@@ -82,13 +81,13 @@ public class DetailTvShowActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(IMG_BASE + "w185" + tvShow.getPoster())
-                .apply(new RequestOptions().override(96,144))
+                .apply(new RequestOptions().override(96, 144))
                 .into(poster);
         name.setText(tvShow.getName());
         originalLanguage.setText(tvShow.getOriginalLanguage());
         firstAirDate.setText(tvShow.getFirstAirDate());
         overview.setText(tvShow.getOverview());
-        voteCount.setRating((float) tvShow.getVoteCount()/2);
+        voteCount.setRating((float) tvShow.getVoteCount() / 2);
 
         favoriteState();
     }
@@ -104,24 +103,22 @@ public class DetailTvShowActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_favorite){
+        if (item.getItemId() == R.id.menu_favorite) {
             if (isFavorite) {
                 boolean delete = removeFromFavoriteTvShow();
-                if(delete){
+                if (delete) {
                     isFavorite = false;
                     setFavorite();
                     setToast(getString(R.string.delete_from_favorite));
-                }
-                else {
+                } else {
                     setToast(getString(R.string.delete_failed));
                 }
             } else {
                 isFavorite = addToFavoriteTvShow();
-                if (isFavorite){
+                if (isFavorite) {
                     setFavorite();
                     setToast(getString(R.string.add_to_favorite));
-                }
-                else{
+                } else {
                     setToast(getString(R.string.add_failed));
                 }
             }
@@ -129,13 +126,12 @@ public class DetailTvShowActivity extends AppCompatActivity {
         return false;
     }
 
-    private boolean addToFavoriteTvShow(){
+    private boolean addToFavoriteTvShow() {
         try {
             Realm.init(this);
             realm = Realm.getDefaultInstance();
-        }
-        catch (RealmMigrationNeededException e){
-            if (Realm.getDefaultConfiguration() !=null){
+        } catch (RealmMigrationNeededException e) {
+            if (Realm.getDefaultConfiguration() != null) {
                 Realm.deleteRealm(Realm.getDefaultConfiguration());
                 realm = Realm.getDefaultInstance();
                 realm.beginTransaction();
@@ -153,15 +149,14 @@ public class DetailTvShowActivity extends AppCompatActivity {
 
         realm = Realm.getDefaultInstance();
         TvShowFavorite puppies = realm.where(TvShowFavorite.class).equalTo("id", this.id).findFirst();
-        if (puppies == null){
+        if (puppies == null) {
             try {
                 realm.beginTransaction();
                 realm.copyToRealm(tvShowFavorite);
                 realm.commitTransaction();
                 realm.close();
                 return true;
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 return false;
             }
@@ -169,14 +164,13 @@ public class DetailTvShowActivity extends AppCompatActivity {
         return false;
     }
 
-    private  boolean removeFromFavoriteTvShow(){
+    private boolean removeFromFavoriteTvShow() {
         try {
             try {
                 Realm.init(this);
                 realm = Realm.getDefaultInstance();
-            }
-            catch (RealmMigrationNeededException e){
-                if (Realm.getDefaultConfiguration() != null){
+            } catch (RealmMigrationNeededException e) {
+                if (Realm.getDefaultConfiguration() != null) {
                     Realm.deleteRealm(Realm.getDefaultConfiguration());
                     realm = Realm.getDefaultInstance();
                     realm.beginTransaction();
@@ -184,24 +178,23 @@ public class DetailTvShowActivity extends AppCompatActivity {
             }
             realm.beginTransaction();
             TvShowFavorite tvShowFavorite = realm.where(TvShowFavorite.class).equalTo("id", id).findFirst();
-            if (tvShowFavorite!=null){
+            if (tvShowFavorite != null) {
                 tvShowFavorite.deleteFromRealm();
                 realm.commitTransaction();
-                while (realm.isInTransaction()){
+                while (realm.isInTransaction()) {
                     Log.e("Realm", "still in transaction");
                 }
                 realm.close();
-                return  true;
+                return true;
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
         return false;
     }
 
-    private void setToast(String message){
+    private void setToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
@@ -210,23 +203,21 @@ public class DetailTvShowActivity extends AppCompatActivity {
         super.onDestroy();
         try {
             realm.close();
-        }
-        catch (RealmMigrationNeededException e){
+        } catch (RealmMigrationNeededException e) {
             e.printStackTrace();
         }
     }
 
-    private void favoriteState(){
+    private void favoriteState() {
         RealmResults<TvShowFavorite> results;
         results = realm.where(TvShowFavorite.class).equalTo("id", id).findAll();
         isFavorite = !results.isEmpty();
     }
 
-    private void setFavorite(){
-        if (isFavorite){
+    private void setFavorite() {
+        if (isFavorite) {
             menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_black_24dp));
-        }
-        else {
+        } else {
             menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border_black_24dp));
         }
     }

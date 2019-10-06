@@ -5,9 +5,10 @@ import android.widget.RemoteViewsService;
 
 public class StackWidgetService extends RemoteViewsService {
 
-    public StackWidgetService(){
+    public StackWidgetService() {
 
     }
+
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
         return new StackRemoteViewsFactory(this.getApplicationContext());

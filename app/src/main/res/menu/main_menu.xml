@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/change_language_menu"
-        android:title="@string/change_language_settings"
         android:icon="@drawable/ic_language_black_24dp"
-        app:showAsAction="never"/>
+        android:title="@string/change_language_settings"
+        app:showAsAction="never" />
     <item
         android:id="@+id/search_menu"
-        android:title="@string/search"
         android:icon="@drawable/ic_search_black_24dp"
+        android:title="@string/search"
         app:actionViewClass="android.widget.SearchView"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
     <item
         android:id="@+id/reminder_menu"
         android:title="@string/reminder_setting"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
 </menu>

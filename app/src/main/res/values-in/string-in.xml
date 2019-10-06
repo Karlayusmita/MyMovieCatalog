@@ -20,8 +20,6 @@
     <string name="delete_failed">Gagal Menghapus</string>
     <string name="detail_tv_show">Detail Acara Tv</string>
     <string name="search">Cari</string>
-    <string name="appwidget_text">Film Kesukaan</string>
-    <string name="add_widget">Tambahkan Widget</string>
     <string name="favorite_movie">Film Kesukaan</string>
     <string name="empty_view">Tidak Ada Data</string>
 </resources>

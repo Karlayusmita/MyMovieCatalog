@@ -1,8 +1,5 @@
 package com.example.mymoviecatalougesub5.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -19,13 +16,15 @@ import com.example.mymoviecatalougesub5.fragment.MovieFragment;
 import com.example.mymoviecatalougesub5.fragment.TvShowFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
-    private Fragment fragment;
-    private final String TAG_FRAGMENT = "fragmnet";
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
+public class MainActivity extends AppCompatActivity {
+    private final String TAG_FRAGMENT = "fragmnet";
+    private Fragment fragment;
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationView
             = menuItem -> {
-        switch (menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.navigation_movie:
                 fragment = new MovieFragment();
                 loadFragment(fragment);
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 loadFragment(fragment);
                 return true;
             case R.id.navigation_favorite:
-                fragment= new FavoriteFragment();
+                fragment = new FavoriteFragment();
                 loadFragment(fragment);
                 return true;
         }
@@ -49,18 +48,17 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView1 = findViewById(R.id.bottom_navigation);
         bottomNavigationView1.setOnNavigationItemSelectedListener(bottomNavigationView);
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             bottomNavigationView1.setSelectedItemId(R.id.navigation_movie);
             fragment = new MovieFragment();
-        }
-        else {
+        } else {
             fragment = getSupportFragmentManager().findFragmentByTag(TAG_FRAGMENT);
             loadFragment(fragment);
         }
     }
 
-    private void loadFragment(Fragment fragment){
-        if (fragment != null){
+    private void loadFragment(Fragment fragment) {
+        if (fragment != null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container_layout, fragment, TAG_FRAGMENT)
                     .commit();
@@ -73,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.main_menu, menu);
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        if (searchManager !=null){
+        if (searchManager != null) {
             SearchView searchView = (SearchView) (menu.findItem(R.id.search_menu)).getActionView();
             searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
             searchView.setQueryHint(getResources().getString(R.string.search));
@@ -81,13 +79,12 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
                     Fragment fragment1 = getSupportFragmentManager().findFragmentByTag(TAG_FRAGMENT);
-                    if (fragment1 instanceof MovieFragment ){
+                    if (fragment1 instanceof MovieFragment) {
                         Intent intent = new Intent(MainActivity.this, SearchMovieActivity.class);
                         intent.putExtra(SearchMovieActivity.EXTRA_QUERY, query);
                         startActivity(intent);
                         return true;
-                    }
-                    else if (fragment1 instanceof TvShowFragment){
+                    } else if (fragment1 instanceof TvShowFragment) {
                         Intent intent = new Intent(MainActivity.this, SearchTvShowActivity.class);
                         intent.putExtra(SearchTvShowActivity.EXTRA_QUERY, query);
                         startActivity(intent);

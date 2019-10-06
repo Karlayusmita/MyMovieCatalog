@@ -7,7 +7,7 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class Network {
-    public static String getFromNetwork(URL url) throws IOException{
+    public static String getFromNetwork(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             InputStream inputStream = urlConnection.getInputStream();
@@ -15,14 +15,12 @@ public class Network {
             scanner.useDelimiter("\\A");
 
             boolean hasInput = scanner.hasNext();
-            if (hasInput){
+            if (hasInput) {
                 return scanner.next();
-            }
-            else {
+            } else {
                 return null;
             }
-        }
-        finally {
+        } finally {
             urlConnection.disconnect();
         }
     }

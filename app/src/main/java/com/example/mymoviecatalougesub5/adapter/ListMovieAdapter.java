@@ -8,21 +8,24 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mymoviecatalougesub5.R;
 import com.example.mymoviecatalougesub5.activity.DetailMovieActivity;
 import com.example.mymoviecatalougesub5.model.Movie;
+
 import java.util.ArrayList;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.ViewHolder> {
+    private static final String IMG_BASE = "http://image.tmdb.org/t/p/";
     private ArrayList<Movie> movieArrayList;
     private Context context;
-    private static final String IMG_BASE = "http://image.tmdb.org/t/p/";
 
-    public ListMovieAdapter(Context context){
+    public ListMovieAdapter(Context context) {
         this.context = context;
         movieArrayList = new ArrayList<>();
     }
@@ -48,7 +51,7 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.View
     @NonNull
     @Override
     public ListMovieAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list,parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
         return new ListMovieAdapter.ViewHolder(view);
     }
 
@@ -58,11 +61,11 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.View
 
         Glide.with(holder.itemView.getContext())
                 .load(IMG_BASE + "w185" + movie.getPoster())
-                .apply(new RequestOptions().override(96,144))
+                .apply(new RequestOptions().override(96, 144))
                 .into(holder.poster);
         holder.title.setText(movie.getTitle());
         holder.releaseDate.setText(movie.getReleaseDate());
-        holder.voteAverage.setRating((float) movie.getVoteAverage()/2);
+        holder.voteAverage.setRating((float) movie.getVoteAverage() / 2);
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(ListMovieAdapter.this.getContext(), DetailMovieActivity.class);

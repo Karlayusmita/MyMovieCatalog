@@ -1,15 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:padding="16dp">
 
     <ImageView
         android:id="@+id/item_poster"
         android:layout_width="96dp"
         android:layout_height="144dp"
-        android:scaleType="fitXY"
-        android:contentDescription="@string/poster" />
+        android:contentDescription="@string/poster"
+        android:scaleType="fitXY" />
+
+    <RatingBar
+        android:id="@+id/item_vote"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_release_date"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/item_poster"
+        android:clickable="false"
+        android:ellipsize="end"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:text="@string/vote_count" />
+
+    <TextView
+        android:id="@+id/item_label_release_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_title"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/item_poster"
+        android:ellipsize="end"
+        android:text="@string/release_date"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/item_release_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_label_release_date"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/item_poster"
+        android:ellipsize="end"
+        android:text="@string/release_date"
+        android:textStyle="bold" />
 
     <TextView
 
@@ -17,47 +56,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/item_poster"
         android:text="@string/movie_title"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_toEndOf="@+id/item_poster" />
-
-    <TextView
-        android:id="@+id/item_label_release_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_toEndOf="@+id/item_poster"
-        android:layout_below="@+id/item_title"
-        android:ellipsize="end"
-        android:text="@string/release_date"
-        android:textSize="12sp"/>
-
-    <TextView
-        android:id="@+id/item_release_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:ellipsize="end"
-        android:text="@string/release_date"
-        android:layout_below="@+id/item_label_release_date"
-        android:layout_toEndOf="@+id/item_poster"
-        android:textStyle="bold"/>
-
-    <RatingBar
-        android:id="@+id/item_vote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ellipsize="end"
-        android:text="@string/vote_count"
-        android:layout_below="@+id/item_release_date"
-        android:layout_toEndOf="@+id/item_poster"
-        android:clickable="false"
-        android:isIndicator="true"
-        android:numStars="5"
-        style="@style/Widget.AppCompat.RatingBar.Indicator"/>
+        android:textStyle="bold" />
 
 </RelativeLayout>

@@ -7,6 +7,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class TvShow implements Parcelable {
+    public static final Creator<TvShow> CREATOR = new Creator<TvShow>() {
+        @Override
+        public TvShow createFromParcel(Parcel in) {
+            return new TvShow(in);
+        }
+
+        @Override
+        public TvShow[] newArray(int size) {
+            return new TvShow[size];
+        }
+    };
     private int id;
     private String poster;
     private String name;
@@ -15,12 +26,12 @@ public class TvShow implements Parcelable {
     private String overview;
     private int voteCount;
 
-    public TvShow(){
+    public TvShow() {
 
     }
 
-    public TvShow(JSONObject object){
-        try{
+    public TvShow(JSONObject object) {
+        try {
             id = object.getInt("id");
             poster = object.getString("poster_path");
             name = object.getString("name");
@@ -28,8 +39,7 @@ public class TvShow implements Parcelable {
             firstAirDate = object.getString("first_air_date");
             overview = object.getString("overview");
             voteCount = object.getInt("vote_count");
-        }
-        catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
@@ -99,18 +109,6 @@ public class TvShow implements Parcelable {
     public void setVoteCount(int voteCount) {
         this.voteCount = voteCount;
     }
-
-    public static final Creator<TvShow> CREATOR = new Creator<TvShow>() {
-        @Override
-        public TvShow createFromParcel(Parcel in) {
-            return new TvShow(in);
-        }
-
-        @Override
-        public TvShow[] newArray(int size) {
-            return new TvShow[size];
-        }
-    };
 
     @Override
     public int describeContents() {

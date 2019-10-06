@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.DetailMovieActivity">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -15,14 +16,32 @@
             android:layout_height="204dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:contentDescription="@string/poster"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            android:contentDescription="@string/poster" />
+            app:layout_constraintVertical_bias="0.0" />
+
+        <RatingBar
+            android:id="@+id/detail_vote_average"
+            style="@style/Widget.AppCompat.RatingBar.Indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:clickable="false"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:text="@string/vote_count"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/detail_poster"
+            app:layout_constraintTop_toBottomOf="@+id/detail_label_vote_average"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/detail_title"
@@ -63,9 +82,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:ellipsize="end"
+            android:text="@string/original_language"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:text="@string/original_language"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -95,9 +114,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:ellipsize="end"
+            android:text="@string/release_date"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:text="@string/release_date"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -113,8 +132,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="@string/overview"
-            android:textStyle="bold"
             android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -151,24 +170,6 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/detail_poster"
             app:layout_constraintTop_toBottomOf="@+id/detail_release_date"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <RatingBar
-            android:id="@+id/detail_vote_average"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/vote_count"
-            android:clickable="false"
-            android:isIndicator="true"
-            android:numStars="5"
-            style="@style/Widget.AppCompat.RatingBar.Indicator"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/detail_poster"
-            app:layout_constraintTop_toBottomOf="@+id/detail_label_vote_average"
             app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.mymoviecatalougesub5.adapter;
 
 import java.util.ArrayList;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -11,7 +12,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
     private ArrayList<String> stringArrayList = new ArrayList<>();
 
-    public ViewPagerAdapter(FragmentManager fragmentManager){
+    public ViewPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
     }
 
@@ -32,7 +33,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         return stringArrayList.get(position);
     }
 
-    public void addFragment(Fragment fragment, String title){
+    public void addFragment(Fragment fragment, String title) {
         fragmentArrayList.add(fragment);
         stringArrayList.add(title);
     }

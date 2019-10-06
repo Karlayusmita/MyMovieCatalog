@@ -19,7 +19,7 @@ public class FavoriteBannerWidget extends AppWidgetProvider {
     public static final String EXTRA_ITEM = "com.example.mymoviecatalougesub5.EXTRA_ITEM";
 
     private static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
+                                        int appWidgetId) {
         Intent intent = new Intent(context, StackWidgetService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
@@ -60,8 +60,8 @@ public class FavoriteBannerWidget extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        if (intent.getAction() != null){
-            if (intent.getAction().equals(TOAST_ACTION)){
+        if (intent.getAction() != null) {
+            if (intent.getAction().equals(TOAST_ACTION)) {
                 int viewIndex = intent.getIntExtra(EXTRA_ITEM, 0);
                 Toast.makeText(context, "Touched view" + viewIndex, Toast.LENGTH_SHORT).show();
             }

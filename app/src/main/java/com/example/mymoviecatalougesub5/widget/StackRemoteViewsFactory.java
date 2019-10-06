@@ -1,10 +1,8 @@
 package com.example.mymoviecatalougesub5.widget;
 
-import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
@@ -17,7 +15,6 @@ import com.example.mymoviecatalougesub5.model.Movie;
 import com.example.mymoviecatalougesub5.model.MovieFavorite;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import io.realm.Realm;
@@ -25,12 +22,12 @@ import io.realm.RealmResults;
 import io.realm.exceptions.RealmMigrationNeededException;
 
 public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
-    private ArrayList<Movie> movieArrayList;
     private final Context mContext;
+    private ArrayList<Movie> movieArrayList;
     private RealmResults<MovieFavorite> movieFavorites;
     private Realm realm;
 
-    StackRemoteViewsFactory(Context context){
+    StackRemoteViewsFactory(Context context) {
         mContext = context;
         movieArrayList = new ArrayList<>();
     }
@@ -45,17 +42,16 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
         try {
             Realm.init(mContext);
             realm = Realm.getDefaultInstance();
-        }
-        catch (RealmMigrationNeededException e){
-            if (Realm.getDefaultConfiguration() != null){
+        } catch (RealmMigrationNeededException e) {
+            if (Realm.getDefaultConfiguration() != null) {
                 Realm.deleteRealm(realm.getDefaultConfiguration());
                 realm = Realm.getDefaultInstance();
             }
         }
 
         movieFavorites = realm.where(MovieFavorite.class).findAll();
-        if (!movieFavorites.isEmpty()){
-            for (int i = 0; i < movieFavorites.size(); i++){
+        if (!movieFavorites.isEmpty()) {
+            for (int i = 0; i < movieFavorites.size(); i++) {
                 Movie dummy = new Movie();
                 dummy.setId(movieFavorites.get(i).getId());
                 dummy.setPoster(movieFavorites.get(i).getPoster());
@@ -80,9 +76,8 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
         try {
             Realm.init(mContext);
             realm = Realm.getDefaultInstance();
-        }
-        catch (RealmMigrationNeededException e){
-            if (Realm.getDefaultConfiguration() != null){
+        } catch (RealmMigrationNeededException e) {
+            if (Realm.getDefaultConfiguration() != null) {
                 Realm.deleteRealm(realm.getDefaultConfiguration());
                 realm = Realm.getDefaultInstance();
             }
@@ -93,15 +88,14 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
         String title = movieArrayList.get(position).getTitle();
         Log.d("Widget Load", posterPath);
 
-        if (movieArrayList.size() > 0){
+        if (movieArrayList.size() > 0) {
             try {
                 bitmap = Glide.with(mContext)
                         .asBitmap()
                         .load(Api.getPoster(posterPath))
-                        .into(800,600).get();
+                        .into(800, 600).get();
                 Log.d("Widget Load", "Success");
-            }
-            catch (InterruptedException | ExecutionException e){
+            } catch (InterruptedException | ExecutionException e) {
                 Log.d("Widget Load", "error");
             }
 

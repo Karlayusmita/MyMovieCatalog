@@ -21,14 +21,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ListTvShowAdapter extends RecyclerView.Adapter<ListTvShowAdapter.ViewHolder> {
+    private static final String IMG_BASE = "http://image.tmdb.org/t/p/";
     private ArrayList<TvShow> tvShowArrayList;
     private Context context;
-    private static final String IMG_BASE = "http://image.tmdb.org/t/p/";
 
-    public ListTvShowAdapter(Context context){
+    public ListTvShowAdapter(Context context) {
         this.context = context;
         tvShowArrayList = new ArrayList<>();
     }
+
     private ArrayList<TvShow> getTvShowArrayList() {
         return tvShowArrayList;
     }
@@ -49,7 +50,7 @@ public class ListTvShowAdapter extends RecyclerView.Adapter<ListTvShowAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list,parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
         return new ViewHolder(view);
     }
 
@@ -58,12 +59,12 @@ public class ListTvShowAdapter extends RecyclerView.Adapter<ListTvShowAdapter.Vi
         TvShow tvShow = tvShowArrayList.get(position);
 
         Glide.with(holder.itemView.getContext())
-                .load(IMG_BASE+"w185" + tvShow.getPoster())
-                .apply(new RequestOptions().override(96,144))
+                .load(IMG_BASE + "w185" + tvShow.getPoster())
+                .apply(new RequestOptions().override(96, 144))
                 .into(holder.poster);
         holder.name.setText(tvShow.getName());
         holder.firstAirDate.setText(tvShow.getFirstAirDate());
-        holder.voteCount.setRating((float)tvShow.getVoteCount()/2);
+        holder.voteCount.setRating((float) tvShow.getVoteCount() / 2);
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(ListTvShowAdapter.this.getContext(), DetailTvShowActivity.class);

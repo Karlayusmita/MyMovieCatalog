@@ -46,8 +46,8 @@ public class RemainderSettingsActivity extends AppCompatPreferencesActivity {
             boolean value = (boolean) newValue;
 
             String key = preference.getKey();
-            String daily = "daily_remainder";
-            String release = "release_remainder";
+            String daily = "daily_reminder";
+            String release = "release_reminder";
             if (key.equals(daily)) {
                 if (value) {
                     dailyAlarmReceiver.setRepeatingAlarm(getAppContext());
@@ -80,29 +80,8 @@ public class RemainderSettingsActivity extends AppCompatPreferencesActivity {
                         .getBoolean(preference.getKey(), false));
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setupActionBar();
-
-        dailyAlarmReceiver = new DailyAlarmReceiver();
-        releaseAlarmReceiver = new ReleaseAlarmReceiver();
-        context = getApplicationContext();
-        movieList = new ArrayList<>();
-
-        this.getFragmentManager().beginTransaction().replace(android.R.id.content, new RemainderPreferenceFragment()).commit();
-    }
-
-
     public static Context getAppContext() {
         return context;
-    }
-
-    private void setupActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayShowHomeEnabled(true);
-        }
     }
 
     public static void setAlarm(List<Movie> movies) {
@@ -119,6 +98,26 @@ public class RemainderSettingsActivity extends AppCompatPreferencesActivity {
         URL url = Api.getUpComingMovie(currentDate);
         new MovieAsyncTask(currentDate).execute(url);
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setupActionBar();
+
+        dailyAlarmReceiver = new DailyAlarmReceiver();
+        releaseAlarmReceiver = new ReleaseAlarmReceiver();
+        context = getApplicationContext();
+        movieList = new ArrayList<>();
+
+        this.getFragmentManager().beginTransaction().replace(android.R.id.content, new RemainderPreferenceFragment()).commit();
+    }
+
+    private void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayShowHomeEnabled(true);
+        }
     }
 
     @Override

@@ -1,7 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#09C"
     android:padding="@dimen/widget_margin">
 
     <LinearLayout
@@ -10,13 +9,12 @@
         android:orientation="vertical"
         android:weightSum="10">
 
-        <StackView
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <StackView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/stack_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="9"
-            android:loopViews="true"/>
+            android:loopViews="true" />
 
         <TextView
             android:id="@+id/banner_text"
@@ -29,7 +27,7 @@
             android:textAlignment="center"
             android:textColor="#fff"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -43,6 +41,6 @@
         android:textColor="#ffffff"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </FrameLayout>

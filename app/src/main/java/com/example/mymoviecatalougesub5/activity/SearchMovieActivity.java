@@ -1,14 +1,11 @@
 package com.example.mymoviecatalougesub5.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+
 import com.example.mymoviecatalougesub5.R;
 import com.example.mymoviecatalougesub5.adapter.ListMovieAdapter;
 import com.example.mymoviecatalougesub5.api.Api;
@@ -22,6 +19,11 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class SearchMovieActivity extends AppCompatActivity {
     public static final String EXTRA_QUERY = "extra_query";
@@ -49,7 +51,7 @@ public class SearchMovieActivity extends AppCompatActivity {
             new SearchMovieAsyncTask().execute(url);
         } else {
             movieArrayList = savedInstanceState.getParcelableArrayList("list");
-            if (movieArrayList!=null){
+            if (movieArrayList != null) {
                 adapter.setMovieArrayList(movieArrayList);
             }
         }
@@ -66,7 +68,7 @@ public class SearchMovieActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    public class SearchMovieAsyncTask extends AsyncTask<URL, Void, String>{
+    public class SearchMovieAsyncTask extends AsyncTask<URL, Void, String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -80,8 +82,7 @@ public class SearchMovieActivity extends AppCompatActivity {
             String result = null;
             try {
                 result = Network.getFromNetwork(url);
-            }
-            catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             Log.e("result", result);
@@ -98,13 +99,12 @@ public class SearchMovieActivity extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(s);
                 JSONArray jsonArray = jsonObject.getJSONArray("results");
 
-                for (int i=0; i<jsonArray.length();i++){
+                for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject object = jsonArray.getJSONObject(i);
                     Movie movie = new Movie(object);
                     movieArrayList.add(movie);
                 }
-            }
-            catch (JSONException e){
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
             adapter.setMovieArrayList(movieArrayList);
