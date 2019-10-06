@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_activity_reminder_settings">Pengaturan Pengingat</string>
+    <string name="reminder_setting">Pengaturan Pengingat</string>
+    <string name="pref_release_Title">Film Baru!!</string>
+    <string name="pref_daily_title">Hai, ini pengingat harian</string>
+    <string name="notification_message">Hi, %s rilis hari ini</string>
+    <string name="message_daily_reminder">Saatnya untuk melihat katalog anda</string>
+    <string name="message_set_daily_alarm">Alarm harian diatur</string>
+    <string name="message_set_release_alarm">Alarm rilis diatur</string>
+</resources>
