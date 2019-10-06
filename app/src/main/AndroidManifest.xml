@@ -2,12 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mymoviecatalougesub5">
 
-    <permission android:name="com.example.mymoviecatalougesub5.READ_DATABASE"
-        android:protectionLevel="normal"/>
-    <permission android:name="com.example.mymoviecatalougesub5.WRITE_DATABASE"
-        android:protectionLevel="normal"/>
-
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.RemainderSettingsActivity"
-            android:label="@string/title_activity_reminder_settings"/>
+            android:label="@string/title_activity_reminder_settings" />
         <activity android:name=".activity.SearchTvShowActivity" />
         <activity android:name=".activity.SearchMovieActivity" />
         <activity android:name=".activity.DetailTvShowActivity" />
@@ -30,6 +24,13 @@
             </intent-filter>
         </activity>
 
+        <provider
+            android:name=".provider.MovieProvider"
+            android:authorities="com.example.mymoviecatalougesub5"
+            android:exported="true"
+            android:readPermission="com.example.mymoviecatalougesub5.READ_DATABASE"
+            android:writePermission="com.example.mymoviecatalougesub5.WRITE_DATABASE" />
+
         <receiver android:name=".widget.FavoriteBannerWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -40,47 +41,48 @@
                 android:resource="@xml/favorite_banner_widget_info" />
         </receiver>
 
-        <service
-            android:name=".widget.StackWidgetService"
-            android:exported="true"
-            android:enabled="true"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-        <service android:name=".service.CleanupJobService" />
-
         <receiver android:name=".widget.FavoriteBannerWidget">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/favorite_banner_widget_info"/>
+                android:resource="@xml/favorite_banner_widget_info" />
         </receiver>
 
         <receiver
             android:name=".alarm.ReleaseAlarmReceiver"
             android:enabled="true"
-            android:exported="false">
-        </receiver>
+            android:exported="false"></receiver>
 
-        <receiver android:name=".alarm.DailyAlarmReceiver"
+        <receiver
+            android:name=".alarm.DailyAlarmReceiver"
             android:enabled="true"
-            android:exported="false">
-        </receiver>
+            android:exported="false"></receiver>
 
-        <provider
-            android:authorities="com.example.mymoviecatalougesub5"
-            android:name=".provider.MovieProvider"
-            android:exported="false"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:readPermission="com.example.moviecatalougesub5.READ_DATABASE"
-            android:writePermission="com.example.moviecatalougesub5.WRITE_DATABASE"/>
+        <service
+            android:name=".widget.StackWidgetService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
 
-
+        <service
+            android:name=".service.CleanupJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
+    <permission
+        android:name="com.example.mymoviecatalougesub5.WRITE_DATABASE"
+        android:protectionLevel="normal" />
 
+    <permission
+        android:name="com.example.mymoviecatalougesub5.READ_DATABASE"
+        android:protectionLevel="normal" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
 
 </manifest>

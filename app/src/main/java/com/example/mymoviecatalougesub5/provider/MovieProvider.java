@@ -13,12 +13,8 @@ import android.net.Uri;
 import android.text.format.DateUtils;
 import android.util.Log;
 
-import com.example.mymoviecatalougesub5.model.Movie;
 import com.example.mymoviecatalougesub5.model.MovieFavorite;
 import com.example.mymoviecatalougesub5.service.CleanupJobService;
-
-import java.util.ArrayList;
-import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,10 +41,12 @@ public class MovieProvider extends ContentProvider {
     private static final String OVERVIEW = "overview";
     private static final String VOTE_AVERAGE = "vote_average";
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+
     static {
-        uriMatcher.addURI(CONTENT_AUTHORITY, TABLE_TASKS,TASK);
-        uriMatcher.addURI(CONTENT_AUTHORITY,TABLE_TASKS + "/#", TASK_ID);
+        uriMatcher.addURI(CONTENT_AUTHORITY, TABLE_TASKS, TASK);
+        uriMatcher.addURI(CONTENT_AUTHORITY, TABLE_TASKS + "/#", TASK_ID);
     }
+
     private Realm realm;
 
     @Override
@@ -78,11 +76,11 @@ public class MovieProvider extends ContentProvider {
         }
         MatrixCursor myCursor = new MatrixCursor(new String[]{ID, POSTER, TITLE, ORIGINAl_LANGUAGE,
                 RELEASE_DATE, OVERVIEW, VOTE_AVERAGE});
-        try{
-            switch (match){
+        try {
+            switch (match) {
                 case TASK:
                     RealmResults<MovieFavorite> realmResults = realm.where(MovieFavorite.class).findAll();
-                    for (MovieFavorite movieFavorite : realmResults){
+                    for (MovieFavorite movieFavorite : realmResults) {
                         Object[] rowData = new Object[]{movieFavorite.getId(), movieFavorite.getPoster(), movieFavorite.getTitle(),
                                 movieFavorite.getReleaseDate(), movieFavorite.getOriginalLanguage(), movieFavorite.getOverview(), movieFavorite.getVoteAverage()};
                         myCursor.addRow(rowData);
@@ -93,14 +91,13 @@ public class MovieProvider extends ContentProvider {
                     Integer id = Integer.parseInt(uri.getPathSegments().get(1));
                     MovieFavorite movieFavorite = realm.where(MovieFavorite.class).equalTo("task_id", id).findFirst();
                     myCursor.addRow(new Object[]{movieFavorite.getId(), movieFavorite.getPoster(), movieFavorite.getTitle(),
-                    movieFavorite.getReleaseDate(), movieFavorite.getOriginalLanguage(), movieFavorite.getOverview(), movieFavorite.getVoteAverage()});
-                    default:
-                        throw new UnsupportedOperationException("Unknown uri: " + uri);
+                            movieFavorite.getReleaseDate(), movieFavorite.getOriginalLanguage(), movieFavorite.getOverview(), movieFavorite.getVoteAverage()});
+                default:
+                    throw new UnsupportedOperationException("Unknown uri: " + uri);
             }
 
             myCursor.setNotificationUri(getContext().getContentResolver(), uri);
-        }
-        finally {
+        } finally {
             realm.close();
         }
         return myCursor;
@@ -128,7 +125,7 @@ public class MovieProvider extends ContentProvider {
         return 0;
     }
 
-    private  void  manageCleanupJob(){
+    private void manageCleanupJob() {
         Log.d(TAG, "Scheduling cleanup job");
         JobScheduler jobScheduler = (JobScheduler) getContext()
                 .getSystemService(Context.JOB_SCHEDULER_SERVICE);
@@ -140,17 +137,17 @@ public class MovieProvider extends ContentProvider {
                 .setPersisted(true)
                 .build();
 
-        if (jobScheduler.schedule(task) != JobScheduler.RESULT_SUCCESS){
+        if (jobScheduler.schedule(task) != JobScheduler.RESULT_SUCCESS) {
             Log.w(TAG, "Unable to schedule cleanup job");
         }
     }
 
-    class MyRealmMigration implements RealmMigration{
+    class MyRealmMigration implements RealmMigration {
 
         @Override
         public void migrate(DynamicRealm realm, long oldVersion, long newVersion) {
             RealmSchema schema = realm.getSchema();
-            if (oldVersion != 0){
+            if (oldVersion != 0) {
                 schema.create(TABLE_TASKS)
                         .addField(ID, Integer.class)
                         .addField(POSTER, String.class)
